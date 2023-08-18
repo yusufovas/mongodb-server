@@ -7,5 +7,6 @@ router
     .post('/courses', courses.post)
     .put('/courses/:id', courses.put)
     .delete('/courses/:id', courses.delete)
+    .get('/courses/:id', courses.getById)
 
 module.exports = router

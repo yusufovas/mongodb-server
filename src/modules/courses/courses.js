@@ -41,20 +41,36 @@ module.exports = {
   },
 
   delete: async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
 
     try {
-        const deleted_course = await courses_model.findByIdAndDelete({ _id: id })
+      const deleted_course = await courses_model.findByIdAndDelete({ _id: id });
 
-        res.status(200).json({
-            success:true,
-            data: deleted_course
-        })
+      res.status(200).json({
+        success: true,
+        data: deleted_course,
+      });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            data: error.message
-        })
+      res.status(500).json({
+        success: false,
+        data: error.message,
+      });
+    }
+  },
+
+  getById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const found_course = await courses_model.findById({ _id: id });
+      res.status(200).json({
+        success: true,
+        data: found_course,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        data: error.message,
+      });
     }
   },
 };
