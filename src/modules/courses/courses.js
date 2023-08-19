@@ -2,7 +2,7 @@ const courses_model = require("./model");
 
 module.exports = {
   get: async (_, res) => {
-    res.json(await courses_model.find());
+    return res.json(await courses_model.find());
   },
   post: async (req, res) => {
     const new_course = new courses_model(req.body);
@@ -28,7 +28,7 @@ module.exports = {
         { $set: req.body },
         { new: true }
       );
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         data: updated_course,
       });
@@ -46,7 +46,7 @@ module.exports = {
     try {
       const deleted_course = await courses_model.findByIdAndDelete({ _id: id });
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: deleted_course,
       });
@@ -62,7 +62,7 @@ module.exports = {
     const { id } = req.params;
     try {
       const found_course = await courses_model.findById({ _id: id });
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         data: found_course,
       });
